@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+import asyncio
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
 from tzlocal import get_localzone
 from pytz import timezone
 from datetime import datetime
@@ -28,6 +36,7 @@ from logging import (
     warning as log_warning,
 )
 from uvloop import install
+install()
 
 # from faulthandler import enable as faulthandler_enable
 # faulthandler_enable()
